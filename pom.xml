@@ -7,11 +7,12 @@
     <modelVersion>4.0.0</modelVersion>
     <groupId>stulga.minesweeper</groupId>
     <artifactId>minesweeper-parent</artifactId>
-    <version>0.1.0</version>
+    <version>0.2.0</version>
     <packaging>pom</packaging>
 
     <modules>
         <module>core</module>
+	<module>game</module>
     </modules>
 
     <properties>
@@ -25,6 +26,11 @@
                 <artifactId>minesweeper-core</artifactId>
                 <version>${project.version}</version>
             </dependency>
+	    <dependency>
+	        <groupId>${project.groupId}</groupId>
+		<artifactId>minesweeper-game</artifactId>
+		<version>${project.version}</version>
+	    </dependency>
         </dependencies>
     </dependencyManagement>
 
