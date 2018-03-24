@@ -12,8 +12,8 @@
 
     <modules>
         <module>core</module>
-	<module>game</module>
-	<module>view</module>
+        <module>game</module>
+        <module>view</module>
     </modules>
 
     <properties>
@@ -27,11 +27,16 @@
                 <artifactId>minesweeper-core</artifactId>
                 <version>${project.version}</version>
             </dependency>
-	    <dependency>
-	        <groupId>${project.groupId}</groupId>
-		<artifactId>minesweeper-game</artifactId>
-		<version>${project.version}</version>
-	    </dependency>
+            <dependency>
+                <groupId>${project.groupId}</groupId>
+                <artifactId>minesweeper-game</artifactId>
+                <version>${project.version}</version>
+            </dependency>
+            <dependency>
+                <groupId>${project.groupId}</groupId>
+                <artifactId>minesweeper-view</artifactId>
+                <version>${project.version}</version>
+            </dependency>
         </dependencies>
     </dependencyManagement>
 

@@ -7,36 +7,50 @@ package minesweeper.view;
 
 import javafx.event.EventHandler;
 import javafx.scene.control.Button;
-import static javafx.scene.input.MouseButton.PRIMARY;
-import static javafx.scene.input.MouseButton.SECONDARY;
 import javafx.scene.input.MouseEvent;
 import javafx.scene.text.Font;
 import minesweeper.core.model.Coordinate;
 import minesweeper.game.Game;
+import static minesweeper.game.Game.Status.IN_PLAY;
+import static minesweeper.game.Game.Status.LOSE;
+import static minesweeper.game.Game.Status.NOT_STARTED;
+import static minesweeper.game.Game.Status.WIN;
 
 /**
  *
  * @author sjstulga
  */
-public class CellButton extends Button {
+public class GameBoardButton extends Button {
+
+    private static final Font MONOSPACED = Font.font("Monospaced");
 
     private final Game game;
     private final Coordinate coordinate;
+    private final EventHandler<? super MouseEvent> clickHandler;
 
-    public CellButton(Game game, Coordinate coordinate, EventHandler<? super MouseEvent> handler) {
+    public GameBoardButton(Game game, Coordinate coordinate, EventHandler<? super MouseEvent> clickHandler) {
+        super(" ");
+
         this.game = game;
         this.coordinate = coordinate;
-
-        setFocusTraversable(false);
-        setFont(Font.font("Monospaced"));
-        setText(" ");
-        setOnMouseClicked((event) -> {
-            click(event);
-            handler.handle(event);
-        });
+        this.clickHandler = clickHandler;
     }
 
-    private void click(MouseEvent event) {
+    public void init() {
+        setFocusTraversable(false);
+        setFont(MONOSPACED);
+        setOnMouseClicked(this::doMouseClick);
+    }
+
+    public Game getGame() {
+        return game;
+    }
+
+    public Coordinate getCoordinate() {
+        return coordinate;
+    }
+
+    public void doMouseClick(MouseEvent event) {
         switch (game.getStatus()) {
             case NOT_STARTED:
             case IN_PLAY:
@@ -50,7 +64,7 @@ public class CellButton extends Button {
                                 break;
                             default:
                             // do nothing
-                        }
+                            }
                         break;
                     case SECONDARY:
                         if (Game.Status.IN_PLAY.equals(game.getStatus())) {
@@ -66,6 +80,8 @@ public class CellButton extends Button {
             default:
                 throw new IllegalStateException("game is unknown state " + game.getStatus());
         }
+
+        clickHandler.handle(event);
         event.consume();
     }
 }

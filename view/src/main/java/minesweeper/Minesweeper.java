@@ -7,28 +7,26 @@ package minesweeper;
 
 import javafx.application.Application;
 import javafx.stage.Stage;
-import minesweeper.view.factories.GameSceneFactory;
-import minesweeper.view.factories.MenuSceneFactory;
+import minesweeper.view.controller.MenuViewController;
+import minesweeper.view.MenuView;
 
 /**
  *
  * @author sjstulga
  */
 public class Minesweeper extends Application {
-    
+
     @Override
     public void start(Stage primaryStage) {
-        MenuSceneFactory menuSceneFactory = new MenuSceneFactory(primaryStage);
-        GameSceneFactory gameSceneFactory = new GameSceneFactory(primaryStage);
-
-        menuSceneFactory.setGameSceneFactory(gameSceneFactory);
-        gameSceneFactory.setMenuSceneFactory(menuSceneFactory);
-
         primaryStage.setTitle("Minesweeper");
-        primaryStage.setScene(menuSceneFactory.create());
-        primaryStage.sizeToScene();
-        primaryStage.show();
 
+        MenuView menuViewModel = new MenuView();
+        MenuViewController menuViewController = new MenuViewController(primaryStage, menuViewModel);
+
+        menuViewController.init();
+        menuViewController.display();
+
+        primaryStage.show();
         primaryStage.setOnCloseRequest((event) -> {
             System.exit(0);
         });
@@ -40,5 +38,5 @@ public class Minesweeper extends Application {
     public static void main(String[] args) {
         launch(args);
     }
-    
+
 }
