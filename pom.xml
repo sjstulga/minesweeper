@@ -7,12 +7,13 @@
     <modelVersion>4.0.0</modelVersion>
     <groupId>stulga.minesweeper</groupId>
     <artifactId>minesweeper-parent</artifactId>
-    <version>0.2.0</version>
+    <version>0.3.0</version>
     <packaging>pom</packaging>
 
     <modules>
         <module>core</module>
 	<module>game</module>
+	<module>view</module>
     </modules>
 
     <properties>
